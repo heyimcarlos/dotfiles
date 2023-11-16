@@ -259,6 +259,39 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      routes = {
+        {
+          filter = {
+            event = 'notify',
+            find = "No information available",
+          },
+          opts = { skip = true }
+        }
+      },
+      presets = {
+        lsp_doc_border = true
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          background_colour = "#0e0e0e",
+        },
+      }
+    },
+  },
+
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -400,6 +433,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = { "node_modules" },
     mappings = {
       i = {
         ['<C-u>'] = false,
