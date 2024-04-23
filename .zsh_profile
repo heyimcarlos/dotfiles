@@ -1,0 +1,2 @@
+#  NOTE: bind tmux-sessionizer (requires sourcing from .zshrc)
+bindkey -s ^f "tmux-sessionizer\n"
