@@ -30,6 +30,12 @@ If you've already cloned the repository and missed the submodules, you can fetch
 git submodule update --init --recursive
 ```
 
+To clone and install, run the following command:
+
+```bash
+git clone --recurse-submodules https://github.com/heyimcarlos/dotfiles.git "${XDG_CONFIG_HOME:-$HOME}"
+```
+
 ### Configuration Details
 
 - **Neovim**:
@@ -42,15 +48,3 @@ git submodule update --init --recursive
 - **Scripts**:
   - `open_vertical_pane`: Script to open new panes vertically in tmux.
   - `tmux-sessionizer`: A quick session management script for tmux.
-
-### Usage
-
-After cloning, link the desired configuration files to their respective locations or use a script like [stow](https://www.gnu.org/software/stow/) to manage the symlinking process automatically.
-
-For example, to link the tmux configuration files, you could use:
-
-```bash
-ln -s ~/path/to/dotfiles/tmux/tmux.conf ~/.tmux.conf
-```
-
-Replace `~/path/to/dotfiles` with the actual path to where you have cloned this repository.
