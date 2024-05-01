@@ -14,7 +14,7 @@ plugins=(
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # compinit
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -23,6 +23,8 @@ eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 export LANG=en_US.UTF-8
+
+export EDITOR=/opt/homebrew/bin/nvim
 
 # Git
 alias gc="git commit -m"
