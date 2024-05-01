@@ -16,17 +16,26 @@ config.use_fancy_tab_bar = false
 config.color_scheme = "Catppuccin Mocha"
 config.enable_tab_bar = false
 config.font_size = 14.0
-config.macos_window_background_blur = 50
-config.window_background_opacity = 0.8
+config.macos_window_background_blur = 40
+config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"
-config.enable_scroll_bar = true
+-- config.enable_scroll_bar = true
 
 -- config.window_padding = {
--- 	left = 0,
--- 	right = 0,
--- 	top = 0,
--- 	bottom = 0,
+-- left = 0,
+-- right = 0,
+-- top = 0,
+-- bottom = 0,
 -- }
+
+config.keys = {
+	{
+		key = "F",
+		mods = "CTRL",
+		action = wezterm.action.ToggleFullScreen,
+	},
+}
+
 config.mouse_bindings = {
 	-- Ctrl-click will open the link under the mouse cursor
 	{
