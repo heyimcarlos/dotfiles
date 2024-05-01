@@ -7,6 +7,7 @@ This repository contains personal configuration files (dotfiles) that I use to c
 - **.config/**
   - **nvim/**: My personal Neovim setup as a submodule.
   - **tmux/**: Configuration files for tmux, tailored specifically for macOS.
+  - **starship/**: Replacement for p10k, written in Rust.
 - **bin/**: Custom scripts to enhance productivity.
 - **.gitconfig**: Git configuration settings.
 - **.gitignore**: Specifies intentionally untracked files to ignore.
