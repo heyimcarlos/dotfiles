@@ -42,6 +42,11 @@ alias ga='git add -p'
 alias gcoall='git checkout -- .'
 alias gr='git remote'
 alias gre='git reset'
+alias g="git"
+
+# LazyGit
+alias gg=lazygit
+alias lg=lazygit
 
 # Dirs
 alias ..="cd .."
@@ -50,10 +55,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-# Example aliases
-alias g="git"
+# Vim
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
+
 alias python="python3"
 alias py="python3"
 alias pip="pip3"
@@ -90,3 +96,4 @@ eval "$(fzf --zsh)"
 
 # zoxide
 eval "$(zoxide init zsh)"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
