@@ -65,6 +65,10 @@ alias py="python3"
 alias pip="pip3"
 alias rs="rustc"
 
+# Eza
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+
 # GOROOT -> where packages are installed
 export GOROOT=/usr/local/go
 
