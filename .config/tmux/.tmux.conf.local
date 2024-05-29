@@ -396,6 +396,9 @@ bind -r P switch-client -p
 bind -r n next-window #!important
 bind -r p previous-window #!important
 
+# Open current directory
+bind o run-shell "open #{pane_current_path}"
+
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
 
