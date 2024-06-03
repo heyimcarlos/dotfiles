@@ -53,7 +53,7 @@
   root = ~/.ghq
 [user]
     name = Carlos De la Cruz
-    email = me@heyimcarlos.dev
+    email = carlosdlc.dev@gmail.com
     username = heyimcarlos
 [credential]
 	helper = store
