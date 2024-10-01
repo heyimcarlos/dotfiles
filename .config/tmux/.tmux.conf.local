@@ -399,6 +399,9 @@ bind -r p previous-window #!important
 # Open current directory
 bind o run-shell "open #{pane_current_path}"
 
+# What is this?
+bind -r e kill-pane -a
+
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
 
