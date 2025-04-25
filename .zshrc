@@ -12,7 +12,6 @@ plugins=(
 
 # Reevaluate the prompt string each time it's displaying a prompt
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# compinit
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,11 +75,8 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
-# Python 3.9
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-
 # custom scripts folder
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 source ~/.zsh_profile
 

@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Documents/ ~/ ~/Documents/personal ~/Documents/personal/bevy ~/Documents/work ~/Documents/work/305gm ~/Documents/school ~/Documents/school/semester3 ~/.config -mindepth 1 -maxdepth 1 -type d | fzf --prompt='Select a directory: ')
+    selected=$(find ~/Documents/ ~/ ~/Documents/personal ~/Documents/work ~/Documents/school ~/.config -mindepth 1 -maxdepth 1 -type d | fzf --prompt='Select a directory: ')
 fi
 
 if [[ -z $selected ]]; then
