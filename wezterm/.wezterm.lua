@@ -7,24 +7,31 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- config.font = wezterm.font_with_fallback({
--- 	"Fira Code",
--- 	"MesloLGS NF",
--- })
+config.font = wezterm.font_with_fallback({
+	"MesloLGS Nerd Font",
+})
+
+-- Font
+config.font_size = 12
+config.line_height = 1.1
+config.cell_width = 0.9
 
 config.use_fancy_tab_bar = false
-config.color_scheme = "Catppuccin Mocha"
 config.enable_tab_bar = false
-config.font_size = 14.0
-config.macos_window_background_blur = 40
-config.window_background_opacity = 0.7
+config.color_scheme = "Github Dark"
+config.window_background_opacity = 0.925
 config.window_decorations = "RESIZE"
 config.enable_scroll_bar = false
 
+-- config.enable_wayland = true
+-- config.front_end = "WebGpu"
+
+config.max_fps = 120
+
 config.window_padding = {
-	left = 5,
+	left = 0,
 	right = 0,
-	top = 14,
+	top = 0,
 	bottom = 0,
 }
 
