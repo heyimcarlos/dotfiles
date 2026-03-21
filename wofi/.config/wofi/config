@@ -1,13 +1,5 @@
-[config]
-show=drun
-prompt=Search
-width=500
-height=400
-columns=1
 allow_images=true
-image_size=32
-term=ghostty
-insensitive=true
-print_command=true
-hide_scroll=true
 no_actions=true
+hide_scroll=true
+width=45%
+height=40%

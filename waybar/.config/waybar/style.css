@@ -1,154 +1,156 @@
-/*style_8*/
-
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Font Awesome 5 Free", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    min-height: 0;
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 10px;
+  min-height: 0;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 0px;
 }
 
-window#waybar {
-    background-color: rgba(26, 27, 38, 0.7);
-    color: #c0caf5;
-    border-top: 2px solid rgba(65, 72, 104, 0.8);
+#waybar {
+  background: transparent;
+  color: #c6d0f5;
+  margin: 2px 2px;
 }
 
-tooltip {
-     border-radius: 12px;
-     background-color: rgba(36, 40, 59, 0.9);
-     border: 1px solid #e0af68;
+#workspaces {
+  border-radius: 5px;
+  margin: 5px;
+  background: #101010;
+  margin-left: 2px;
 }
 
-#clock,
-#custom-todo,
-#custom-countdown,
-#backlight,
-#pulseaudio,
-#custom-clip,
-#custom-taskmanager,
-#custom-galculator,
-#custom-snip,
-#tray,
-#idle_inhibitor,
-#custom-power,
-#custom-reboot,
-#custom-quit,
-#custom-lock,
-#custom-launcher {
-    background-color: rgba(40, 44, 63, 0.6);
-    padding: 2px 12px;
-    margin: 4px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+#workspaces button {
+  color: #babbf1;
+  border-radius: 5px;
+  padding: 0.4rem;
 }
 
-/* Modules: App Launcher Strip */
-#custom-chrome,
-#custom-terminal,
-#custom-code,
+#workspaces button.active {
+  color: #99d1db;
+  border-radius: 5px;
+}
+
+button {
+  background: transparent;
+}
+
+#workspaces button:hover {
+  background: #1e1e1e;
+  border: 0px solid transparent;
+}
+
 #custom-music,
-#custom-thunar {
-    background-color: rgba(40, 44, 63, 0.6);
-    padding: 2px 12px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border-radius: 0;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#custom-lock,
+#custom-power,
+#custom-weather,
+#custom-uptime,
+#custom-docker {
+  background-color: #101010;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
 }
 
-#custom-chrome {
-    margin-left: 0;
-    border-radius: 8px 0 0 8px;
-}
-
-#custom-thunar {
-    margin-right: 4px;
-    border-radius: 0 8px 8px 0;
-}
-
-/* Modules: Hover Effects */
-#clock:hover,
-#custom-todo:hover,
-#custom-countdown:hover,
-#backlight:hover,
-#pulseaudio:hover,
-#custom-clip:hover,
-#custom-snip:hover,
-#custom-chrome:hover,
-#custom-terminal:hover,
-#custom-code:hover,
-#custom-music:hover,
-#custom-taskmanager:hover,
-#custom-galculator:hover,
-#custom-thunar:hover,
-#tray:hover,
-#idle_inhibitor:hover,
-#custom-launcher:hover {
-    background-color: rgba(65, 72, 104, 0.9);
-    border-color: #e0af68;
-}
-
-#pulseaudio.muted:hover {
-    border-color: #f7768e;
-}
-
-#custom-power:hover {
-    background-color: rgba(65, 72, 104, 0.9);
-    border-color: #f7768e; 
-}
-
-#custom-reboot:hover,
-#custom-quit:hover,
-#custom-lock:hover {
-    background-color: rgba(65, 72, 104, 0.9);
-    border-color: #7aa2f7; 
-}
-
-/* Modules: Specific Styles */
-#custom-countdown,
-#custom-todo,
 #clock {
-    font-weight: bold;
-    color: #e0af68;
+  color: #8caaee;
+  border-radius: 5px;
 }
 
-#keyboard-state {
-    background: transparent;
+#custom-weather {
+  color: #8caaee;
+  margin-left: 0.5rem;
+  border-radius: 5px;
 }
 
-#keyboard-state label.locked {
-    background-color: rgba(65, 72, 104, 0.9);
-    border: 1px solid #e0af68; 
-    color: #c0caf5;
-    padding: 0px 12px;
-    margin: 4px 0px;
-    border-radius: 8px;
+#battery {
+  color: #a6d189;
 }
 
-#taskbar {
-    background: rgba(40, 44, 63, 0.6);
-    padding: 0px 8px;
-    margin: 4px;
-    border-radius: 8px;
-    border: 1px solid rgba(65, 72, 104, 0.8);
+#battery.charging {
+  color: #a6d189;
 }
 
-#taskbar button {
-    background: transparent;
-    padding: 0 8px;
-    margin: 0;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease-out;
+#battery.warning:not(.charging) {
+  color: #e78284;
 }
 
-#taskbar button:hover {
-    border-bottom-color: #e0af68;
+#backlight {
+  color: #e5c890;
 }
 
-#taskbar button.active {
-    background: rgba(65, 72, 104, 0.9);
-    border-bottom-color: #e0af68;
+#backlight,
+#battery {
+  border-radius: 0;
+}
+
+#pulseaudio {
+  color: #ea999c;
+  border-radius: 5px 0px 0px 5px;
+}
+
+#custom-docker {
+  color: #85c1dc;
+}
+
+#custom-music {
+  color: #ca9ee6;
+  border-radius: 5px;
+}
+
+#custom-lock {
+  color: #babbf1;
+}
+
+#custom-power {
+  margin-right: 1rem;
+  border-radius: 0px 5px 5px 0px;
+  color: #e78284;
+}
+
+#custom-docker.docker {
+  color: #85c1dc;
+}
+
+#custom-docker.docker-none {
+  color: #737994;
+}
+
+#custom-docker.docker-error {
+  color: #e78284;
+}
+
+#custom-weather.clear {
+  color: #e5c890; /* Sunny yellow */
+}
+
+#custom-weather.cloud {
+  color: #99d1db; /* Light blue */
+}
+
+#custom-weather.rain {
+  color: #8caaee; /* Blue */
+}
+
+#custom-weather.snow {
+  color: #c6d0f5; /* White-ish */
+}
+
+#custom-weather.thunder {
+  color: #ca9ee6; /* Purple */
+}
+
+#custom-weather.fog {
+  color: #b0b4bc; /* Gray */
+}
+
+#custom-weather.error {
+  color: #e78284; /* Red */
 }
