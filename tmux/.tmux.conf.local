@@ -410,8 +410,8 @@ bind -r P switch-client -p
 bind -r n next-window #!important
 bind -r p previous-window #!important
 
-# Open current directory
-bind o run-shell "open #{pane_current_path}"
+# Open current directory (macOS: open, Linux: xdg-open / dolphin fallback)
+bind o run-shell "if [ \"$(uname)\" = \"Darwin\" ]; then open '#{pane_current_path}'; else xdg-open '#{pane_current_path}'; fi"
 
 # What is this?
 bind -r e kill-pane -a
