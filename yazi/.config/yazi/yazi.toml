@@ -1,0 +1,12 @@
+[mgr]
+show_hidden = true
+
+[[mgr.prepend_keymap]]
+on  = "y"
+run = [ "shell -- echo %s | xclip -i -selection clipboard -t text/uri-list", "yank" ]
+
+# Linux: Hyprland + Hyprpaper
+[[opener.set-wallpaper]]
+run  = "hyprctl hyprpaper reload ,%s1"
+for  = "linux"
+desc = "Set as wallpaper"
