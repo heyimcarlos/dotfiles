@@ -1,29 +1,23 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-)
-
 # Reevaluate the prompt string each time it's displaying a prompt
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-source $ZSH/oh-my-zsh.sh
-
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle marlonrichert/zsh-autocomplete@main
+antigen apply
 
 # starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
+export SHELL=/usr/bin/zsh
+
 export LANG=en_US.UTF-8
 
-export EDITOR=/opt/homebrew/bin/nvim
+# pnpm
+alias pn="pnpm"
 
 # Git
 alias gc="git commit -m"
@@ -64,36 +58,44 @@ alias py="python3"
 alias pip="pip3"
 alias rs="rustc"
 
+source /usr/share/nvm/init-nvm.sh
+
 # Eza
 alias l="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
 
-# GOROOT -> where packages are installed
-export GOROOT=/usr/local/go
-
-# GOPATH -> where work directory is
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOPATH="$HOME/go"
+export PATH="$PATH:/usr/lib/go/bin:$GOPATH/bin"
 
 # custom scripts folder
 export PATH="$HOME/.local/bin:$PATH"
 
+export PATH="$HOME/dotfiles/bin:$PATH"
+
 source ~/.zsh_profile
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# CUDA
+export CUDA_HOME=/opt/cuda
+export PATH=$PATH:$CUDA_HOME/bin
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-export OPENSSL_DIR=$(brew --prefix openssl)
-export OPENSSL_LIB_DIR=$(brew --prefix openssl)/lib
-export OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # fzf
 eval "$(fzf --zsh)"
 
-# zoxide
-eval "$(zoxide init zsh)"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+# bun completions
+[ -s "/home/ren/.bun/_bun" ] && source "/home/ren/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+. "$HOME/.cargo/env"
+
+# opencode
+export PATH=/home/ren/.opencode/bin:$PATH
+
+# editor
+export EDITOR=nvim
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"

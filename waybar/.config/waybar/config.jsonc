@@ -56,11 +56,12 @@
   },
 
   "network": {
-    "format-wifi": "󰤢 {bandwidthDownBits}",
-    "format-ethernet": "󰈀 {bandwidthDownBits}",
+    "interval": 1,
+    "format-wifi": "󰤢 ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+    "format-ethernet": "󰈀 ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
     "format-disconnected": "󰤠 No Network",
-    "interval": 5,
-    "tooltip": false
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} via {gwaddr}\nSignal: {signalStrength}% | Speed: {linkspeed}Gbps",
+    "max-length": 50
   },
 
   "cpu": {
