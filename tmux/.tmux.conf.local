@@ -382,9 +382,13 @@ tmux_conf_urlscan_options="--compact --dedupe"
 
 # this is the place to override or undo settings
 
-# pi
-set -g extended-keys on
-set -g extended-keys-format csi-u
+# Ghostty/tmux input rendering fix (2026-05-25): CSI-u extended keys can
+# leave stale glyphs while editing/deleting in some terminal/app combinations.
+# Keep tmux on a modern terminfo, but disable extended-key rewriting.
+set -g default-terminal "tmux-256color"
+set -g extended-keys off
+set -gu extended-keys-format
+set -as terminal-features ',xterm-ghostty:RGB'
 
 # increase history size
 #set -g history-limit 10000
@@ -404,7 +408,11 @@ unbind C-b
 set -g prefix C-t
 bind C-t send-prefix
 
-bind-key -n -r C-f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+# Ctrl+F: launch tmux-sessionizer directly in a tmux window.
+# Use the real script path; ~/.local/bin/tmux-sessionizer does not exist on this machine.
+# Avoid wrapping this in `run-shell "tmux neww ..."`, which can miss the active tmux
+# server/socket when invoked from inside an existing tmux session.
+bind-key -n C-f new-window -c "#{pane_current_path}" "/home/ren/dotfiles/bin/tmux-sessionizer"
 
 #  Move between sessions (clients)
 bind -r N switch-client -n
