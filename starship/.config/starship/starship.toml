@@ -2,8 +2,9 @@ add_newline = false
 # A minimal left prompt
 format = """$directory$character"""
 palette = "catppuccin_mocha"
-# move the rest of the prompt to the right
-right_format = """$all"""
+# Safe right prompt: keep useful side details, but do NOT use `$all` here.
+# Keep gcloud/cloud out because it reintroduced zsh/tmux/Ghostty cursor corruption.
+right_format = """$git_branch$git_status$git_metrics$package$nodejs$bun$python$rust$golang$cmd_duration$jobs$status$time"""
 command_timeout = 1000
 
 # [directory.substitutions]
@@ -34,10 +35,23 @@ symbol = "  "
 # detect_files = ['aws']
 disabled = true
 
+[nodejs]
+format = '[ $version](bold green) '
+# Show only when Node context is active (Starship's defaults already detect JS/TS files,
+# package.json, .node-version, .nvmrc, node_modules, etc.).
+
 [golang]
 format = '[ ](bold cyan)'
 
 [docker_context]
+disabled = true
+
+# Disabled because adding the cloud/gcloud module to the right prompt reintroduced
+# zsh/tmux/Ghostty cursor corruption, even without account/email text.
+[gcloud]
+format = 'on [$symbol]($style) '
+symbol = '☁️ '
+style = 'bold blue'
 disabled = true
 
 [hostname]
