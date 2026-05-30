@@ -83,11 +83,16 @@
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "",
+    "format-muted": " muted",
     "format-icons": {
       "default": ["", "", " "]
     },
-    "on-click": "pavucontrol"
+    "scroll-step": 5,
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "sh -c 'command -v pavucontrol >/dev/null && pavucontrol || command -v pwvucontrol >/dev/null && pwvucontrol || blueman-manager'",
+    "tooltip-format": "{desc}\nLeft click: mute/unmute\nScroll: volume up/down\nRight click: mixer"
   },
 
   "custom/power": {
