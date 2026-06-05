@@ -1,6 +1,10 @@
 font-family = "Hack Nerd Font Mono"
 font-size = 11
 
+# Ghostty sends Shift+Enter as plain Enter by default in this setup.
+# Map it to the same ESC+Enter sequence Hermes/prompt_toolkit already
+# handles for Alt+Enter, so Shift+Enter inserts a newline in Hermes.
+keybind = shift+enter=text:\x1b\r
 
 window-padding-x = 5
 window-padding-y = 5
