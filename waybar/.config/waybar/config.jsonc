@@ -15,7 +15,6 @@
     "memory",
     "custom/docker",
     "tray",
-    "custom/lock",
     "custom/power"
   ],
 
@@ -60,7 +59,7 @@
     "format-wifi": "󰤢 ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
     "format-ethernet": "󰈀 ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
     "format-disconnected": "󰤠 No Network",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr} via {gwaddr}\nSignal: {signalStrength}% | Speed: {linkspeed}Gbps",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr} via {gwaddr}\nSignal: {signalStrength}%",
     "max-length": 50
   },
 
@@ -105,7 +104,7 @@
     "format": "{}",
     "return-type": "json",
     "interval": 10,
-    "exec": "$(pwd)/scripts/docker-stats/docker-stats",
+    "exec": "/home/ren/.config/waybar/scripts/docker-stats/docker-stats",
     "tooltip": true
   },
 
@@ -113,7 +112,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 1800,
-    "exec": "$(pwd)/scripts/weather-stats/weather-stats",
+    "exec": "/home/ren/.config/waybar/scripts/weather-stats/weather-stats",
     "return-type": "json"
   }
 }

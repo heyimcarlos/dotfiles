@@ -40,7 +40,7 @@ git clone --recurse-submodules https://github.com/heyimcarlos/dotfiles.git "${XD
 ### Configuration Details
 
 - **Neovim**:
-  - The Neovim configuration is maintained as a submodule pointing to [kickstart.nvim](https://github.com/heyimcarlos/kickstart.nvim).
+  - The Neovim configuration is maintained as a submodule and uses [LazyVim](https://www.lazyvim.org/) on top of `lazy.nvim`.
 - **Tmux**:
   - `macos.conf`: Tmux settings optimized for macOS.
   - `statusline.conf`: Customizes the tmux status line.
