@@ -1,6 +1,13 @@
 # Reevaluate the prompt string each time it's displaying a prompt
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
+# Homebrew (macOS) / Linuxbrew
+if [[ "$OSTYPE" == darwin* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
+
 source ~/.config/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
@@ -12,12 +19,7 @@ antigen apply
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-export SHELL=/usr/bin/zsh
-
 export LANG=en_US.UTF-8
-
-# pnpm
-alias pn="pnpm"
 
 # Git
 alias gc="git commit -m"
@@ -58,44 +60,51 @@ alias py="python3"
 alias pip="pip3"
 alias rs="rustc"
 
-source /usr/share/nvm/init-nvm.sh
+# Node: fnm (macOS) / nvm (Linux)
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+elif [[ -s /usr/share/nvm/init-nvm.sh ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
 
 # Eza
 alias l="eza -l --icons --git -a"
 alias lt="eza --tree --level=2 --long --icons --git"
 
+# Go
 export GOPATH="$HOME/go"
-export PATH="$PATH:/usr/lib/go/bin:$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
+[[ -d /usr/lib/go/bin ]] && export PATH="$PATH:/usr/lib/go/bin"
 
 # custom scripts folder
 export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="$HOME/dotfiles/bin:$PATH"
+[[ -d "$HOME/repos/dotfiles/bin" ]] && export PATH="$HOME/repos/dotfiles/bin:$PATH"
+[[ -d "$HOME/dotfiles/bin" ]] && export PATH="$HOME/dotfiles/bin:$PATH"
 
 source ~/.zsh_profile
 
-# CUDA
-export CUDA_HOME=/opt/cuda
-export PATH=$PATH:$CUDA_HOME/bin
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-
+# CUDA (Linux only)
+if [[ -d /opt/cuda ]]; then
+  export CUDA_HOME=/opt/cuda
+  export PATH=$PATH:$CUDA_HOME/bin
+  export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+fi
 
 # fzf
 eval "$(fzf --zsh)"
 
-# bun completions
-[ -s "/home/ren/.bun/_bun" ] && source "/home/ren/.bun/_bun"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
-. "$HOME/.cargo/env"
+# Rust: rustup via brew (macOS) / rustup.rs (Linux)
+[[ -d /opt/homebrew/opt/rustup/bin ]] && export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # opencode
-export PATH=/home/ren/.opencode/bin:$PATH
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
 # editor
 export EDITOR=nvim
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
