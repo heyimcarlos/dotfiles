@@ -411,10 +411,12 @@ unbind C-b
 set -g prefix C-t
 bind C-t send-prefix
 
-# Ctrl+F: launch tmux-sessionizer in a tmux popup so fzf gets a real TTY
-# without creating a throwaway window that can appear to blink and disappear.
-# The script switches/creates sessions itself after selection.
-bind-key -n C-f display-popup -E -w 85% -h 75% -d "#{pane_current_path}" "/home/ren/dotfiles/bin/tmux-sessionizer"
+# Ctrl+F: pass through to Herdr when it is the foreground application;
+# otherwise launch tmux-sessionizer in a tmux popup as before.
+bind-key -n C-f if-shell \
+  'ps -o stat=,comm= -t "#{pane_tty}" | awk '\''$1 ~ /\+/ && $2 == "herdr" { found=1 } END { exit !found }'\'' ' \
+  'send-keys C-f' \
+  'display-popup -E -w 85% -h 75% -d "#{pane_current_path}" "/home/ren/dotfiles/bin/tmux-sessionizer"'
 
 #  Move between sessions (clients)
 bind -r N switch-client -n

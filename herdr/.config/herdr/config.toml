@@ -1,0 +1,102 @@
+# Herdr bindings migrated from ~/.tmux.conf.local.
+# tmux sessions map to Herdr workspaces; tmux windows map to Herdr tabs.
+
+[terminal]
+# Match tmux's "retain current path" behavior for panes and tabs.
+new_cwd = "follow"
+
+[keys]
+# Keep the user's tmux prefix.
+prefix = "ctrl+t"
+
+# Session/workspace navigation.
+goto = "prefix+g"
+new_workspace = "prefix+ctrl+c"
+next_workspace = "prefix+shift+n"
+previous_workspace = "prefix+shift+p"
+
+# Window/tab navigation.
+new_tab = "prefix+c"
+next_tab = ["prefix+n", "prefix+ctrl+l"]
+previous_tab = ["prefix+p", "prefix+ctrl+h"]
+last_pane = "prefix+tab"
+
+# Pane movement.
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Reserve uppercase H/J/K/L for the tmux-style resize commands below.
+swap_pane_left = ""
+swap_pane_down = ""
+swap_pane_up = ""
+swap_pane_right = ""
+
+# Match tmux's '-' (split down) and '_' (split right).
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+shift+minus"
+
+# Match tmux's '+' zoom and Enter copy-mode bindings while retaining
+# Herdr's discoverable defaults as secondary bindings.
+zoom = ["prefix+plus", "prefix+z"]
+copy_mode = ["prefix+enter", "prefix+["]
+
+# Prefix+e is used below for tmux's kill-pane -a equivalent.
+edit_scrollback = "prefix+shift+e"
+
+# Prefix+o is used below to open the focused pane's current directory.
+open_notification_target = ""
+
+[ui]
+# tmux had mouse mode and OS clipboard copy enabled.
+mouse_capture = true
+copy_on_select = true
+
+[[keys.command]]
+key = "ctrl+f"
+type = "popup"
+command = "/home/ren/dotfiles/bin/herdr-sessionizer"
+description = "select or create a workspace"
+width = "85%"
+height = "75%"
+
+[[keys.command]]
+key = "prefix+o"
+type = "shell"
+command = "xdg-open \"$HERDR_ACTIVE_PANE_CWD\""
+description = "open focused pane directory"
+
+[[keys.command]]
+key = "prefix+e"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane list | jq -r --arg tab \"$HERDR_ACTIVE_TAB_ID\" --arg pane \"$HERDR_ACTIVE_PANE_ID\" '.result.panes[] | select(.tab_id == $tab and .pane_id != $pane) | .pane_id' | while IFS= read -r pane; do \"$HERDR_BIN_PATH\" pane close \"$pane\"; done"
+description = "close all other panes in this tab"
+
+[[keys.command]]
+key = "prefix+shift+h"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane resize --direction left --amount 0.03 --pane \"$HERDR_ACTIVE_PANE_ID\""
+description = "resize pane left"
+
+[[keys.command]]
+key = "prefix+shift+j"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane resize --direction down --amount 0.03 --pane \"$HERDR_ACTIVE_PANE_ID\""
+description = "resize pane down"
+
+[[keys.command]]
+key = "prefix+shift+k"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane resize --direction up --amount 0.03 --pane \"$HERDR_ACTIVE_PANE_ID\""
+description = "resize pane up"
+
+[[keys.command]]
+key = "prefix+shift+l"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane resize --direction right --amount 0.03 --pane \"$HERDR_ACTIVE_PANE_ID\""
+description = "resize pane right"
+
+[theme]
+name = "kanagawa"
+auto_switch = false

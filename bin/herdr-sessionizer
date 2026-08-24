@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+herdr_bin=${HERDR_BIN_PATH:-$(command -v herdr)}
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+elif [[ $# -eq 0 ]]; then
+    roots=("$HOME" "$HOME/repos" "$HOME/thoughts" "$HOME/Documents" "$HOME/.config")
+    existing_roots=()
+    for root in "${roots[@]}"; do
+        [[ -d $root ]] && existing_roots+=("$root")
+    done
+
+    selected=$(
+        find "${existing_roots[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
+            | sort -u \
+            | fzf --prompt='Select a directory: '
+    )
+else
+    printf 'usage: %s [directory]\n' "${0##*/}" >&2
+    exit 2
+fi
+
+[[ -n ${selected:-} ]] || exit 0
+
+if [[ ! -d $selected ]]; then
+    printf 'herdr-sessionizer: not a directory: %s\n' "$selected" >&2
+    exit 1
+fi
+
+selected=$(realpath "$selected")
+selected_name=$(basename "$selected" | tr -c '[:alnum:]_-' '_' | sed 's/_\+$//; s/^_\+//')
+[[ -n $selected_name ]] || selected_name=sessionizer
+
+# If no server exists yet, launching Herdr from the selected directory creates
+# the initial workspace there and attaches the current terminal.
+if ! workspaces=$("$herdr_bin" workspace list 2>/dev/null); then
+    cd "$selected"
+    exec "$herdr_bin"
+fi
+
+# Match tmux-sessionizer's behavior: the directory basename identifies the
+# reusable unit. In Herdr that unit is a workspace rather than a session.
+workspace_id=$(
+    jq -r --arg label "$selected_name" \
+        'first(.result.workspaces[] | select(.label == $label) | .workspace_id) // empty' \
+        <<<"$workspaces"
+)
+
+if [[ -n $workspace_id ]]; then
+    "$herdr_bin" workspace focus "$workspace_id" >/dev/null
+else
+    "$herdr_bin" workspace create \
+        --cwd "$selected" \
+        --label "$selected_name" \
+        --focus >/dev/null
+fi
+
+# A popup returns to its attached Herdr client when this script exits. When the
+# script is run from a normal shell, attach that terminal after selecting.
+if [[ -z ${HERDR_ACTIVE_PANE_ID:-} ]]; then
+    exec "$herdr_bin"
+fi
