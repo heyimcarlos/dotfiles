@@ -66,6 +66,32 @@ delivery = "herdr"
 [ui.toast.herdr]
 position = "top-right"
 
+# vim-herdr-navigation: forwards ctrl+h/j/k/l into Vim/Neovim when focused,
+# otherwise focuses the adjacent herdr pane. Installed by install.sh.
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"
+
 [[keys.command]]
 key = "ctrl+f"
 type = "popup"

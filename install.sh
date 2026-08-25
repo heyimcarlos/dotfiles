@@ -58,6 +58,10 @@ fi
 if command -v herdr >/dev/null; then
   info "installing herdr pi integration"
   herdr integration install pi >/dev/null || true
+  if ! herdr plugin list 2>&1 | grep -q vim-herdr-navigation; then
+    info "installing vim-herdr-navigation plugin"
+    herdr plugin install paulbkim-dev/vim-herdr-navigation --yes >/dev/null || true
+  fi
 fi
 
 # pi npm packages (plannotator, extmgr, anthropic auth) install themselves
