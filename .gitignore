@@ -1,2 +1,11 @@
 node-modules/
+node_modules/
 .DS_Store
+
+# herdr runtime state (dir is symlinked into the repo, so runtime files land here)
+herdr/.config/herdr/*.log
+herdr/.config/herdr/*.sock
+herdr/.config/herdr/session.json
+herdr/.config/herdr/session-history.json
+herdr/.config/herdr/.plugins.lock
+herdr/.config/herdr/plugins/
