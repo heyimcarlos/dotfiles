@@ -92,3 +92,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # editor
 export EDITOR=nvim
+
+# opencode
+export PATH=/Users/carlosdlc/.opencode/bin:$PATH
+
+# Pi
+export PATH="/Users/carlosdlc/.local/share/fnm/node-versions/v24.19.0/installation/bin:$PATH"
