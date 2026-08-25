@@ -1,0 +1,24 @@
+{
+  "lastChangelogVersion": "0.84.3",
+  "theme": {
+    "0": "d",
+    "1": "a",
+    "2": "r",
+    "3": "k",
+    "mode": "light",
+    "light": "kanagawa-lotus",
+    "dark": "kanagawa-dragon"
+  },
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-8",
+  "packages": [
+    "npm:@gotgenes/pi-anthropic-auth",
+    "npm:pi-extmgr",
+    "npm:@plannotator/pi-extension"
+  ],
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "favicon": "totman",
+  "displayName": "Carlos de la Cruz"
+}

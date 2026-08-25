@@ -1,0 +1,57 @@
+{
+  "name": "pi-subagent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local fork of @smoose/pi-subagent 0.1.0: children load extensions (auth works) with a nesting guard.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "scripts": {
+    "test": "node --test 'test/**/*.mjs'",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "pi",
+    "subagent",
+    "delegation",
+    "pi-package"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smoosex/pi-subagent.git"
+  },
+  "homepage": "https://github.com/smoosex/pi-subagent",
+  "bugs": {
+    "url": "https://github.com/smoosex/pi-subagent/issues"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-agent-core": ">=0.77.0",
+    "@earendil-works/pi-ai": ">=0.77.0",
+    "@earendil-works/pi-coding-agent": ">=0.78.0",
+    "@earendil-works/pi-tui": ">=0.78.0",
+    "typebox": ">=1.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-agent-core": {
+      "optional": true
+    },
+    "@earendil-works/pi-ai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@earendil-works/pi-agent-core": "^0.77.0",
+    "@earendil-works/pi-ai": "^0.77.0",
+    "@earendil-works/pi-coding-agent": "^0.78.0",
+    "@earendil-works/pi-tui": "^0.78.0",
+    "@types/node": ">=24.0.0",
+    "typebox": "^1.1.38",
+    "typescript": ">=5.9.0"
+  }
+}

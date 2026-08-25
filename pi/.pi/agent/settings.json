@@ -1,0 +1,15 @@
+{
+  "lastChangelogVersion": "0.84.3",
+  "theme": "kanagawa-wave",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-8",
+  "packages": [
+    "npm:@gotgenes/pi-anthropic-auth",
+    "npm:pi-extmgr",
+    "npm:@plannotator/pi-extension"
+  ],
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "hideThinkingBlock": true
+}
