@@ -1,64 +1,64 @@
 #!/usr/bin/env bash
+# herdr-sessionizer — tmux-sessionizer, but for Herdr.
+# Fuzzy-pick a project directory, then focus the workspace whose label
+# matches it, or create a new workspace rooted there.
+#
+# Runs inside a Herdr popup (ctrl+f). Herdr provides HERDR_ENV and
+# HERDR_BIN_PATH in popup/pane environments.
+
 set -euo pipefail
 
-herdr_bin=${HERDR_BIN_PATH:-$(command -v herdr)}
-
-if [[ $# -eq 1 ]]; then
-    selected=$1
-elif [[ $# -eq 0 ]]; then
-    roots=("$HOME" "$HOME/repos" "$HOME/thoughts" "$HOME/Documents" "$HOME/.config")
-    existing_roots=()
-    for root in "${roots[@]}"; do
-        [[ -d $root ]] && existing_roots+=("$root")
-    done
-
-    selected=$(
-        find "${existing_roots[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
-            | sort -u \
-            | fzf --prompt='Select a directory: '
-    )
-else
-    printf 'usage: %s [directory]\n' "${0##*/}" >&2
-    exit 2
+if [[ "${HERDR_ENV:-}" != "1" ]]; then
+  echo "herdr-sessionizer: not inside a Herdr session" >&2
+  exit 1
 fi
 
-[[ -n ${selected:-} ]] || exit 0
+herdr_bin="${HERDR_BIN_PATH:-herdr}"
 
-if [[ ! -d $selected ]]; then
-    printf 'herdr-sessionizer: not a directory: %s\n' "$selected" >&2
-    exit 1
-fi
-
-selected=$(realpath "$selected")
-selected_name=$(basename "$selected" | tr -c '[:alnum:]_-' '_' | sed 's/_\+$//; s/^_\+//')
-[[ -n $selected_name ]] || selected_name=sessionizer
-
-# If no server exists yet, launching Herdr from the selected directory creates
-# the initial workspace there and attaches the current terminal.
-if ! workspaces=$("$herdr_bin" workspace list 2>/dev/null); then
-    cd "$selected"
-    exec "$herdr_bin"
-fi
-
-# Match tmux-sessionizer's behavior: the directory basename identifies the
-# reusable unit. In Herdr that unit is a workspace rather than a session.
-workspace_id=$(
-    jq -r --arg label "$selected_name" \
-        'first(.result.workspaces[] | select(.label == $label) | .workspace_id) // empty' \
-        <<<"$workspaces"
+# Project roots to scan. Add more paths here as needed.
+search_dirs=(
+  "$HOME/repos"
+  "$HOME/repos/gm"
 )
 
-if [[ -n $workspace_id ]]; then
-    "$herdr_bin" workspace focus "$workspace_id" >/dev/null
+if [[ $# -eq 1 ]]; then
+  selected="$1"
 else
-    "$herdr_bin" workspace create \
-        --cwd "$selected" \
-        --label "$selected_name" \
-        --focus >/dev/null
+  # Keep only search dirs that actually exist; find fails on missing paths
+  # and (with pipefail) would poison the pipeline status.
+  existing_dirs=()
+  for dir in "${search_dirs[@]}"; do
+    [[ -d "$dir" ]] && existing_dirs+=("$dir")
+  done
+  if [[ ${#existing_dirs[@]} -eq 0 ]]; then
+    echo "herdr-sessionizer: no search directories exist" >&2
+    exit 1
+  fi
+  selected=$(
+    find "${existing_dirs[@]}" -mindepth 1 -maxdepth 1 -type d \
+      -not -name '.*' 2>/dev/null |
+      sort -u |
+      while IFS= read -r line; do printf '%s\n' "${line#"$HOME/"}"; done |
+      fzf --prompt='workspace> ' --height=100% --reverse
+  ) || exit 0
+  selected="$HOME/$selected"
 fi
 
-# A popup returns to its attached Herdr client when this script exits. When the
-# script is run from a normal shell, attach that terminal after selecting.
-if [[ -z ${HERDR_ACTIVE_PANE_ID:-} ]]; then
-    exec "$herdr_bin"
+[[ -d "$selected" ]] || { echo "not a directory: $selected" >&2; exit 1; }
+
+# Workspace label = directory basename, dots -> underscores (tmux-sessionizer style).
+label=$(basename "$selected" | tr '.' '_')
+
+# Focus the workspace if one with this label already exists.
+existing=$(
+  "$herdr_bin" workspace list |
+    jq -r --arg label "$label" \
+      '.result.workspaces[] | select(.label == $label) | .workspace_id' |
+    head -n1
+)
+
+if [[ -n "$existing" ]]; then
+  "$herdr_bin" workspace focus "$existing"
+else
+  "$herdr_bin" workspace create --cwd "$selected" --label "$label" --focus
 fi

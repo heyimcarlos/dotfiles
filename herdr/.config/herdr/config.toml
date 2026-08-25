@@ -1,3 +1,4 @@
+onboarding = false
 # Herdr bindings migrated from ~/.tmux.conf.local.
 # tmux sessions map to Herdr workspaces; tmux windows map to Herdr tabs.
 
@@ -53,10 +54,22 @@ open_notification_target = ""
 mouse_capture = true
 copy_on_select = true
 
+# dmmulroy-style agent workflow: attention-queue sidebar, symbol state
+# markers, in-app toasts when background agents finish or need input.
+agent_panel_sort = "priority"
+status_indicators = "symbols"
+prompt_new_workspace_name = true
+
+[ui.toast]
+delivery = "herdr"
+
+[ui.toast.herdr]
+position = "top-right"
+
 [[keys.command]]
 key = "ctrl+f"
 type = "popup"
-command = "/home/ren/dotfiles/bin/herdr-sessionizer"
+command = "herdr-sessionizer"
 description = "select or create a workspace"
 width = "85%"
 height = "75%"
@@ -64,7 +77,7 @@ height = "75%"
 [[keys.command]]
 key = "prefix+o"
 type = "shell"
-command = "xdg-open \"$HERDR_ACTIVE_PANE_CWD\""
+command = "open \"$HERDR_ACTIVE_PANE_CWD\""
 description = "open focused pane directory"
 
 [[keys.command]]
