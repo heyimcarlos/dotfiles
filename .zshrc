@@ -95,3 +95,9 @@ export EDITOR=nvim
 
 # fnm (node + globally installed CLIs like pi); uses the "default" alias
 command -v fnm >/dev/null && eval "$(fnm env)"
+
+# pi-web-tools: webfetch works with no config; websearch needs an Exa
+# (or Parallel) MCP-compatible endpoint. Uncomment and fill in to enable:
+# export PI_WEB_TOOLS_EXA_ENDPOINT="https://your-exa-endpoint.example/mcp"
+# export PI_WEB_TOOLS_SEARCH_PROVIDER="parallel"   # alternative provider
+# export PI_WEB_TOOLS_PARALLEL_ENDPOINT="https://your-parallel-endpoint.example/mcp"

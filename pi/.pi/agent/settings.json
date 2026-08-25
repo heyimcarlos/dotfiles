@@ -1,17 +1,23 @@
 {
   "lastChangelogVersion": "0.84.3",
-  "theme": "kanagawa-wave",
+  "theme": "kanagawa-dragon",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-4-8",
   "packages": [
     "npm:@gotgenes/pi-anthropic-auth",
     "npm:pi-extmgr",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "git:github.com/dmmulroy/pi-web-tools"
   ],
   "warnings": {
     "anthropicExtraUsage": false
   },
-  "hideThinkingBlock": true,
+  "hideThinkingBlock": false,
   "showCacheMissNotices": true,
-  "defaultProjectTrust": "always"
+  "defaultProjectTrust": "always",
+  "tuiMode": "fullscreen",
+  "compaction": {
+    "enabled": true
+  },
+  "fullscreenScrollbar": "auto"
 }
