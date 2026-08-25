@@ -11,5 +11,7 @@
   "warnings": {
     "anthropicExtraUsage": false
   },
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "showCacheMissNotices": true,
+  "defaultProjectTrust": "always"
 }
