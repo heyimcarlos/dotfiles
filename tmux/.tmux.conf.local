@@ -412,11 +412,11 @@ set -g prefix C-t
 bind C-t send-prefix
 
 # Ctrl+F: pass through to Herdr when it is the foreground application;
-# otherwise launch tmux-sessionizer in a tmux popup as before.
+# otherwise launch herdr-sessionizer in a tmux popup.
 bind-key -n C-f if-shell \
   'ps -o stat=,comm= -t "#{pane_tty}" | awk '\''$1 ~ /\+/ && $2 == "herdr" { found=1 } END { exit !found }'\'' ' \
   'send-keys C-f' \
-  'display-popup -E -w 85% -h 75% -d "#{pane_current_path}" "tmux-sessionizer"'
+  'display-popup -E -w 85% -h 75% -d "#{pane_current_path}" "herdr-sessionizer"'
 
 #  Move between sessions (clients)
 bind -r N switch-client -n
