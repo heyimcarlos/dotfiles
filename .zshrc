@@ -93,6 +93,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # editor
 export EDITOR=nvim
 
+# git worktree helpers (wt, wtl, wtcd, wtd, wtr, wtp)
+[[ -f "$HOME/repos/dotfiles/zsh/worktrees.zsh" ]] && source "$HOME/repos/dotfiles/zsh/worktrees.zsh"
+
 # fnm (node + globally installed CLIs like pi); uses the "default" alias
 command -v fnm >/dev/null && eval "$(fnm env)"
 
